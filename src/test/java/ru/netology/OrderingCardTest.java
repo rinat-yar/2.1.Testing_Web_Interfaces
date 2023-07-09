@@ -48,7 +48,7 @@ public class OrderingCardTest {
 
     @Test
     void notCorrectTest() {
-        driver.findElement((By.cssSelector("[data-test-id=name] input"))).sendKeys("Ри5ат Ярмухамедов);
+        driver.findElement((By.cssSelector("[data-test-id=name] input"))).sendKeys("Ри5ат Ярмухамедов");
                 driver.findElement((By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79012223344");
         driver.findElement((By.cssSelector("[data-test-id=agreement]"))).click();
         driver.findElement(By.cssSelector("button.button")).click();
@@ -71,26 +71,24 @@ public class OrderingCardTest {
     }
 
     @Test
-    void notCorrectTestPfone() {
-        driver.findElement((By.cssSelector("[data-test-id=name] input"))).sendKeys("Ри5ат Ярмухамедов");
+    void notCorrectTestPhone() {
+        driver.findElement((By.cssSelector("[data-test-id=name] input"))).sendKeys("Ринат Ярмухамедов");
         driver.findElement((By.cssSelector("[data-test-id=phone] input"))).sendKeys("+7901222334455");
         driver.findElement((By.cssSelector("[data-test-id=agreement]"))).click();
         driver.findElement(By.cssSelector("button.button")).click();
-        WebElement errorNotDisplayed = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub"));
+        WebElement errorNotDisplayed = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub"));
         assertTrue(errorNotDisplayed.isDisplayed(), "Ошибка не отображается");
         String text = errorNotDisplayed.getText();
         assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text.trim());
     }
 
     @Test
-    void notCorrectTest
-
-    @() {
+    void notCorrectTest_SpecialСharacter() {
         driver.findElement((By.cssSelector("[data-test-id=name] input"))).sendKeys("Ри@нат Ярмухамедов");
         driver.findElement((By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79012223344");
         driver.findElement((By.cssSelector("[data-test-id=agreement]"))).click();
         driver.findElement(By.cssSelector("button.button")).click();
-        WebElement errorNotDisplayed = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub"));
+        WebElement errorNotDisplayed = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub"));
         assertTrue(errorNotDisplayed.isDisplayed(), "Ошибка не отображается");
         String text = errorNotDisplayed.getText();
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", text.trim());
